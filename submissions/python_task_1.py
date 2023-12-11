@@ -28,7 +28,7 @@ def get_type_count(df)->dict:
     Returns:
         dict: A dictionary with car types as keys and their counts as values.
     """
-    df_car_type = df.copy(deep = False)
+    df_car_type = df.copy(deep = False) #ensures no change in input dataframe
     df_car_type['car_type'] = df_car_type.apply(bin_func, axis = 1)
     car_type_count = df_car_type.sort_values(by = 'car_type').car_type.value_counts(sort = False)
     return car_type_count.to_dict()

@@ -83,7 +83,7 @@ def calculate_toll_rate(df)->pd.DataFrame():
     """
     #in picture distance column has been dropped whereas in instruction it has not been mentioned
     #here we will not drop the distance column
-    distance_df = df.copy()
+    distance_df = df.copy() #ensures no change in input dataframe
     distance_df['moto'] = distance_df.apply(lambda x: x.distance*0.8, axis = 1)
     distance_df['car'] = distance_df.apply(lambda x: x.distance*1.2, axis = 1)
     distance_df['rv'] = distance_df.apply(lambda x: x.distance*1.5, axis = 1)
@@ -106,10 +106,10 @@ def calculate_time_based_toll_rates(df)->pd.DataFrame():
     #expected output is ambiguous as output in picture and through following procedure will be different
     #in out implementaion we have combined both the outputs or another issue - input is mentioned of
     #output of question 3 but input is more similar to output of question 4; either of these has to be
-    #true
-    distance_df, threshold_df = calculate_toll_rate(df), df.copy()
-    toll_df = distance_df.loc[(distance_df.id_end.isin(threshold_df.id_end)) &
-               distance_df.id_start.isin(threshold_df.id_start)]
+    #true; another issue output screenshot shows rate rounded off but in instructions
+    #rate not mentioned to be rounded to 2 places
+    #new changes as input changed to Question 4
+    toll_df = df.copy()
     #create temporary dataframe
     new_df = pd.DataFrame(columns = ['startDay', 'start_time', 'endDay', 'end_time', 'discount_factor'])
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
